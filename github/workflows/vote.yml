@@ -1,0 +1,32 @@
+name: Vote Automation
+
+on:
+  schedule:
+    - cron: '15 2 * * *'  # Runs every day at 02:15 UTC
+  workflow_dispatch:      # Optional: allows manual trigger from GitHub UI
+
+jobs:
+  vote:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.11
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Run vote script
+      env:
+        PRIVATE_KEY1: ${{ secrets.PRIVATE_KEY }}
+        TAIKO_RPC_URL: ${{ secrets.TAIKO_RPC_URL }}
+        MY_WALLET_ADDRESS: ${{ secrets.MY_WALLET_ADDRESS }}
+        VOTE_CONTRACT_ADDRESS: ${{ secrets.VOTE_CONTRACT_ADDRESS }}
+      run: |
+        python vote.py
