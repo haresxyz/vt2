@@ -24,7 +24,7 @@ jobs:
 
     - name: Run vote script
       env:
-        PRIVATE_KEY1: ${{ secrets.PRIVATE_KEY }}
+        PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
         TAIKO_RPC_URL: ${{ secrets.TAIKO_RPC_URL }}
         MY_WALLET_ADDRESS: ${{ secrets.MY_WALLET_ADDRESS }}
         VOTE_CONTRACT_ADDRESS: ${{ secrets.VOTE_CONTRACT_ADDRESS }}
